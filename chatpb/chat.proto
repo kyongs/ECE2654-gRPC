@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "./chatpb";
+
+package chatpb;
+
+service ChatService {
+    rpc JoinChannel(Channel) returns (stream Message) {}
+    rpc SendMessage(stream Message) returns (MessageAck) {}
+}
+
+message Channel {
+    string time = 1;
+    string name = 2;
+    string senders_name = 3;
+}
+
+message Message { //add message
+    string sender = 1;
+    Channel channel = 2;
+    string message = 3;
+}
+
+message MessageAck {
+    string status = 1;
+}
+
+
